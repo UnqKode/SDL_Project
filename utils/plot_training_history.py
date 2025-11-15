@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+
+def plot_training_history(trainer):
+    fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+    axes[0].plot(trainer.train_losses, label='Train Loss', linewidth=2)
+    axes[0].set_xlabel('Epoch')
+    axes[0].set_ylabel('Loss')
+    axes[0].set_title('Training Loss')
+    axes[0].legend()
+    axes[0].grid(True, alpha=0.3)
+    axes[1].plot(trainer.train_accs, label='Train Acc', linewidth=2)
+    axes[1].plot(trainer.val_accs, label='Val Acc', linewidth=2)
+    axes[1].set_xlabel('Epoch')
+    axes[1].set_ylabel('Accuracy')
+    axes[1].set_title('Training & Validation Accuracy')
+    axes[1].legend()
+    axes[1].grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig('training_history.png', dpi=300, bbox_inches='tight')
+    plt.show()
