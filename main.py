@@ -1,3 +1,7 @@
+import requests
+import random
+import json
+import types
 from fastapi import FastAPI
 from pydantic import BaseModel,field_validator
 import torch
@@ -33,8 +37,11 @@ prototypes,_ = load_global_prototypes('./data/global_prototypes.pth')
 
 print("loading complete")
 
+
+
 @app.post("/predict")
 def predict_activity(data:HARSinput):
+    print("input:",data.input)
     input_np = np.array(data.input, dtype=np.float32)
     input_np = input_np.T
     input_t = torch.tensor(input_np).unsqueeze(0).to(device)
